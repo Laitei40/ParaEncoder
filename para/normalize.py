@@ -2,45 +2,19 @@
 
 from __future__ import annotations
 
-import re
-import unicodedata
-
-
-def _reorder_myanmar(text: str) -> str:
-    # Move kinzi to canonical position.
-    text = re.sub(
-        r"(\u1004\u103A\u1039)([\u1000-\u1021])",
-        lambda m: m.group(2) + m.group(1),
-        text,
-    )
-    # Place E vowel and medial RA before the base consonant.
-    text = re.sub(r"([\u1000-\u1021])(\u1031)", r"\2\1", text)
-    text = re.sub(r"([\u1000-\u1021])(\u103C)", r"\2\1", text)
-    # Swap asat and dot if reversed.
-    text = re.sub(r"\u103A\u1037", "\u1037\u103A", text)
-    # Reorder medials to YA, RA, WA, HA.
-    text = re.sub(
-        r"([\u1000-\u1021])([\u103E])(\u103B)",
-        lambda m: m.group(1) + "\u103B" + m.group(2),
-        text,
-    )
-    text = re.sub(
-        r"([\u1000-\u1021])([\u103E])(\u103C)",
-        lambda m: m.group(1) + "\u103C" + m.group(2),
-        text,
-    )
-    text = re.sub(
-        r"([\u1000-\u1021])([\u103E])(\u103D)",
-        lambda m: m.group(1) + "\u103D" + m.group(2),
-        text,
-    )
-    return text
+# NOTE (v0.1.0): Normalization is intentionally disabled for safety.
+# Previous reordering logic corrupted valid canonical Unicode text.
+# Until a provably-safe implementation is available, this function is a
+# strict no-op.  Unicode safety > clever normalization.
 
 
 def normalize_unicode(text: str) -> str:
-    """Normalize Unicode Burmese text with NFC and simple ordering fixes."""
-    if not text:
-        return ""
-    normalized = unicodedata.normalize("NFC", text)
-    normalized = _reorder_myanmar(normalized)
-    return normalized
+    """Return text unchanged (normalization disabled in v0.1.0 for safety).
+
+    ParaEncoder must never modify valid Unicode text unless explicitly and
+    provably necessary.  Reordering / NFC logic has been removed because it
+    corrupted canonical input such as "မင်္ဂလာပါ".
+
+    Future versions may re-introduce opt-in, test-backed normalization.
+    """
+    return text

@@ -5,7 +5,7 @@ from __future__ import annotations
 import re
 from typing import Iterable
 
-from para.detect import is_zawgyi
+from para.detect import detect_encoding, is_zawgyi
 from para.normalize import normalize_unicode
 from para.rules import ZAWGYI_TO_UNICODE_RULES
 
@@ -32,8 +32,9 @@ def zg_to_unicode(text: str, *, normalize: bool = True, force: bool = False) -> 
     if not text:
         return ""
 
-    if not force and not is_zawgyi(text):
-        return normalize_unicode(text) if normalize else text
+    # Hard guard: never modify non-Zawgyi input (contract guarantee).
+    if not force and detect_encoding(text) != "zawgyi":
+        return text
 
     converted = text
     for pattern, repl in _COMPILED_RULES:

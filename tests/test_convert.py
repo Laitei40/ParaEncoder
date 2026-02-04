@@ -1,6 +1,11 @@
 from para.convert import zg_to_unicode
 
 
+def test_unicode_mingalaba_is_preserved():
+    """Unicode input must NEVER be modified by zg_to_unicode (contract guarantee)."""
+    assert zg_to_unicode("မင်္ဂလာပါ") == "မင်္ဂလာပါ"
+
+
 def test_simple_replacement():
     zg = "\u106A\u1033"  # NGA in Zawgyi + tall AA
     expected = "\u1009\u102F"
