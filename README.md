@@ -13,8 +13,29 @@ Para is a small, boring, and transparent toolkit for working with Burmese text. 
 
 ## Installation
 ```bash
-pip install para
+pip install paraencoder
 ```
+
+For Office document support (.docx, .xlsx, .odt):
+```bash
+pip install paraencoder[office]
+```
+
+## Supported File Formats
+
+### Plain Text (built-in, no extra dependencies)
+- **Text files:** `.txt`, `.text`, `.log`, `.md`, `.rst`, `.asc`
+- **Web/markup:** `.html`, `.htm`, `.xhtml`, `.xml`, `.json`, `.yaml`, `.yml`, `.csv`, `.tsv`
+- **Documentation:** `.tex`, `.latex`, `.adoc`, `.org`, `.wiki`, `.mediawiki`
+- **Config:** `.ini`, `.cfg`, `.conf`, `.properties`, `.env`, `.toml`, `.lock`
+- **Source code:** `.py`, `.js`, `.ts`, `.java`, `.c`, `.cpp`, `.h`, `.cs`, `.php`, `.rb`, `.go`, `.rs`, `.sh`, `.bat`, `.ps1`, `.sql`
+- **Subtitles:** `.srt`, `.vtt`, `.sub`
+- **Other:** `.po`, `.pot`, `.texi`, `.man`, `.nfo`, `.readme`, `.eml`, `.mbox`
+
+### Office Documents (requires `paraencoder[office]`)
+- **Microsoft Word:** `.docx`, `.docm`
+- **Microsoft Excel:** `.xlsx`, `.xlsm`
+- **OpenDocument:** `.odt`
 
 ## Usage
 ```python
@@ -42,6 +63,12 @@ echo "\u1031\u1010\u1004\u103a" | para convert > output.txt
 Process a file in place (write to stdout by default):
 ```bash
 para convert --input input.txt --output output.txt
+```
+
+Convert Office documents (requires `paraencoder[office]`):
+```bash
+para convert --input "Document.docx" --output "Document_Unicode.docx"
+para convert --input "Spreadsheet.xlsx" --output "Spreadsheet_Unicode.xlsx"
 ```
 
 #### Windows / PowerShell note

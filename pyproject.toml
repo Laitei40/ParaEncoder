@@ -3,8 +3,8 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "para"
-version = "0.1.0"
+name = "paraencoder"
+version = "0.2.1"
 description = "Burmese text detection and conversion toolkit for Zawgyi and Unicode"
 readme = "README.md"
 requires-python = ">=3.9"
@@ -23,12 +23,14 @@ classifiers = [
 dependencies = []
 
 [project.urls]
-Homepage = "https://github.com/para-tooling/para"
-Repository = "https://github.com/para-tooling/para"
-Issues = "https://github.com/para-tooling/para/issues"
+Homepage = "https://github.com/Laitei40/ParaEncoder"
+Repository = "https://github.com/Laitei40/ParaEncoder"
+Issues = "https://github.com/Laitei40/ParaEncoder/issues"
 
 [project.optional-dependencies]
 test = ["pytest>=7"]
+office = ["python-docx>=1.0", "openpyxl>=3.1", "odfpy>=1.4"]
+all = ["python-docx>=1.0", "openpyxl>=3.1", "odfpy>=1.4"]
 
 [project.scripts]
 para = "para.cli:main"
