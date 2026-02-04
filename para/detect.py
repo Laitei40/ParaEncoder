@@ -9,6 +9,9 @@ Encoding = Literal["zawgyi", "unicode", "unknown"]
 
 _MYANMAR_RANGE = re.compile(r"[\u1000-\u109F]")
 
+# If scores are equal or differ by less than this margin, result is "unknown".
+SCORE_TIE_MARGIN = 0
+
 # Patterns that strongly suggest Zawgyi encoding.
 _ZG_PATTERNS = [
     (re.compile(r"[\u105A\u1060-\u1097]"), 4),
@@ -51,7 +54,7 @@ def detect_encoding(text: str) -> Encoding:
     zg_score = _score(text, _ZG_PATTERNS)
     uni_score = _score(text, _UNI_PATTERNS)
 
-    if zg_score == uni_score:
+    if abs(zg_score - uni_score) <= SCORE_TIE_MARGIN:
         return "unknown"
 
     return "zawgyi" if zg_score > uni_score else "unicode"

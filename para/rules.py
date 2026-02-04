@@ -1,68 +1,29 @@
-"""Static regex rules for Zawgyi-to-Unicode conversion."""
+"""Minimal, testable regex rules for Zawgyi-to-Unicode conversion.
+
+Each rule is intentionally small and has a dedicated unit test. This is a
+foundational subset, not full coverage.
+"""
 
 ZAWGYI_TO_UNICODE_RULES = [
+    # Core kinzi and kinzi-with-vowel.
     (r"\u1064", "\u1004\u103A\u1039"),
     (r"\u108B", "\u1004\u103A\u1039\u102D"),
-    (r"\u108C", "\u1004\u103A\u1039\u102E"),
-    (r"\u108D", "\u1004\u103A\u1039\u1036"),
+
+    # Common consonant and vowel forms.
     (r"\u106A", "\u1009"),
-    (r"\u106B", "\u100A"),
-    (r"\u1090", "\u101B"),
-    (r"\u1040([\u102B\u102C\u1036])", "\u101D\\1"),
-    (r"\u108F", "\u1014"),
     (r"\u1033", "\u102F"),
     (r"\u1034", "\u1030"),
     (r"\u105A", "\u102B\u103A"),
-    (r"\u103D\u103C", "\u108A"),
-    (r"\u1088", "\u103E\u102F"),
-    (r"\u1089", "\u103E\u1030"),
-    (r"\u108A", "\u103D\u103E"),
-    (r"\u103B\u103D", "\u103D\u103B"),
+
+    # Reorder prefix E vowel relative to medials.
+    (r"\u1031([\u103B-\u103E])", "\\1\u1031"),
+
+    # Swap asat + dot order.
     (r"\u103A\u1037", "\u1037\u103A"),
+
+    # Move dot after tall U.
     (r"\u1036\u102F", "\u102F\u1036"),
-    (r"\u1036\u1030", "\u1030\u1036"),
-    (r"\u1094", "\u1037"),
-    (r"\u1095", "\u1037"),
+
+    # Basic stacked consonant KA.
     (r"\u1060", "\u1039\u1000"),
-    (r"\u1061", "\u1039\u1001"),
-    (r"\u1062", "\u1039\u1002"),
-    (r"\u1063", "\u1039\u1003"),
-    (r"\u1065", "\u1039\u1005"),
-    (r"\u1066", "\u1039\u1006"),
-    (r"\u1068", "\u1039\u1007"),
-    (r"\u1069", "\u1039\u1008"),
-    (r"\u106C", "\u1039\u100B"),
-    (r"\u106D", "\u1039\u100C"),
-    (r"\u106E", "\u100D\u1039\u100D"),
-    (r"\u106F", "\u100E\u1039\u100D"),
-    (r"\u1070", "\u1039\u100F"),
-    (r"\u1071", "\u1039\u1010"),
-    (r"\u1072", "\u1039\u1010"),
-    (r"\u1073", "\u1039\u1011"),
-    (r"\u1074", "\u1039\u1011"),
-    (r"\u1075", "\u1039\u1012"),
-    (r"\u1076", "\u1039\u1013"),
-    (r"\u1077", "\u1039\u1014"),
-    (r"\u1078", "\u1039\u1015"),
-    (r"\u1079", "\u1039\u1016"),
-    (r"\u107A", "\u1039\u1017"),
-    (r"\u107B", "\u1039\u1018"),
-    (r"\u107C", "\u1039\u1019"),
-    (r"\u1085", "\u1039\u101C"),
-    (r"\u1091", "\u100F\u1039\u100D"),
-    (r"\u1092", "\u100B\u1039\u100C"),
-    (r"\u1097", "\u100B\u1039\u100B"),
-    (r"\u1096", "\u1039\u1010\u103D"),
-    (r"\u103A", "\u103A"),
-    (r"\u103B", "\u103B"),
-    (r"\u103C", "\u103C"),
-    (r"\u103D", "\u103D"),
-    (r"\u103E", "\u103E"),
-    (r"\u1031([\u103B\u103C\u108A])", "\\1\u1031"),
-    (r"\u1031([\u103E\u1088\u1089\u103D])", "\\1\u1031"),
-    (r"\u1031\u108A", "\u108A\u1031"),
-    (r"\u103B([\u103C\u103D])", "\\1\u103B"),
-    (r"\u103A\u102F", "\u102F\u103A"),
-    (r"\u103A\u1030", "\u1030\u103A"),
-    (r"\u103A\u102B", "\u102B\u103A"),
 ]
