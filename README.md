@@ -44,6 +44,19 @@ Process a file in place (write to stdout by default):
 para convert --input input.txt --output output.txt
 ```
 
+#### Windows / PowerShell note
+PowerShell's default encoding corrupts Myanmar text in pipes. Before piping Burmese text, set UTF-8 encoding:
+```powershell
+$OutputEncoding = [System.Text.Encoding]::UTF8
+[Console]::InputEncoding = [System.Text.Encoding]::UTF8
+[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+echo "ျမန္မာ" | para convert
+```
+Or use file-based input/output to avoid pipe issues:
+```powershell
+para convert --input input.txt --output output.txt
+```
+
 ## API surface
 - `para.detect.is_zawgyi(text: str) -> bool`
     - Input: `text` string.
