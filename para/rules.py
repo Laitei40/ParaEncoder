@@ -1,7 +1,7 @@
-"""Zawgyi-to-Unicode conversion rules ported from Rabbit Converter.
+"""Zawgyi-to-Unicode conversion rules ported from ParaEncoder.
 
 Rules are applied in order. Each rule is a (pattern, replacement) tuple.
-Ported from: https://github.com/nicholaussaurus/Rabbit-Converter
+Ported from: https://github.com/Laitei40/ParaEncoder/issues/new
 """
 
 ZAWGYI_TO_UNICODE_RULES = [
