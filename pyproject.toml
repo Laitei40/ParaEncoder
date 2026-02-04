@@ -1,0 +1,41 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "para"
+version = "0.1.0"
+description = "Burmese text detection and conversion toolkit for Zawgyi and Unicode"
+readme = "README.md"
+requires-python = ">=3.9"
+authors = [
+  { name = "Para Maintainers" }
+]
+license = { text = "MIT" }
+keywords = ["myanmar", "burmese", "zawgyi", "unicode", "text", "conversion"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Topic :: Text Processing :: Linguistic",
+]
+dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/para-tooling/para"
+Repository = "https://github.com/para-tooling/para"
+Issues = "https://github.com/para-tooling/para/issues"
+
+[project.optional-dependencies]
+test = ["pytest>=7"]
+
+[project.scripts]
+para = "para.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["para"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
